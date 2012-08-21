@@ -34,6 +34,8 @@ var app = {
             if(deltaZ >= threshold){
                 console.log("Bump detected! Do stuff!");
             }
+            
+            accelZ = acceleration.z;
         };
         
         function accelError() {
