@@ -11,9 +11,9 @@ var app = {
         //app.report('deviceready');
         var networkState = navigator.network.connection.type;
         if(networkState == Connection.NONE)
-            onlineFailure();
+            this.onlineFailure();
         else
-            onlineSuccess();
+            this.onlineSuccess();
     },
     onlineSuccess: function() {
         this.onlineWatcher = navigator.geolocation.watchPosition(this.geoSuccess, this.geoFailure, {});
