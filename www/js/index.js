@@ -11,12 +11,12 @@ var app = {
         //app.report('deviceready');
         var networkState = navigator.network.connection.type;
         if(networkState == Connection.NONE)
-            this.onlineFailure();
+            app.onlineFailure();
         else
-            this.onlineSuccess();
+            app.onlineSuccess();
     },
     onlineSuccess: function() {
-        this.onlineWatcher = navigator.geolocation.watchPosition(this.geoSuccess, this.geoFailure, {});
+        app.onlineWatcher = navigator.geolocation.watchPosition(app.geoSuccess, app.geoFailure, {});
     },
     onlineFailure: function() {
         console.log('This failed');
