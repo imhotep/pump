@@ -1,7 +1,7 @@
 
-(function(){
+(function(exports){
     
-var PumpService = {
+exports.PumpService = {
     
     baseUrl:"",
     
@@ -30,7 +30,7 @@ var PumpService = {
                    longitude:lon,
                    message:message};
         xhr.send(obj);
-    }
+    };
     
     
-})();
+})(window);
