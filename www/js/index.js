@@ -4,7 +4,7 @@ var accelX = 0,
     timestamp = 0;
 
 var threshold = 3;
-var radius = 500; 
+var radius = 5000; 
 
 var app = {
     initialize: function() {

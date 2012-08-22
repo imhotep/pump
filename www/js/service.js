@@ -1,6 +1,6 @@
 var PumpService = {
     
-    baseUrl:"http://23.21.32.1/",
+    baseUrl:"http://23.21.32.1",
     
     getMessagesNear:function(cb,lat,lon,radius) {
         var xhr = new XMLHttpRequest();
