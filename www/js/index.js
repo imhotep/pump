@@ -1,3 +1,9 @@
+
+window.onerror = function(e)
+{
+    console.log("Error:" + e);
+}
+
 var accelX = 0,
     accelY = 0,
     accelZ = 0,
@@ -9,6 +15,9 @@ var radius = 5000;
 var app = {
     initialize: function() {
         document.addEventListener('deviceready', this.deviceready, false);
+        sendButton.addEventListener("click",function() {
+                                        app.onShakeOrButton();
+                                    });
     },
     deviceready: function() {
         // note that this is an event handler so the scope is that of the event
@@ -31,17 +40,7 @@ var app = {
             
             if(deltaZ >= threshold){
                 console.log("Bump detected! Do stuff!");
-                var textField = document.getElementById('sendText');
-                if(textField.value.length > 0)
-                {
-                    console.log("We should send a message");
-                    PumpService.leaveMessage(app.sendMessage, app.position.coords.latitude, app.position.coords.longitude, textField.value);
-                }
-                else
-                {
-                    console.log("We should get the messages");
-                    PumpService.getMessagesNear(app.recvMessage, app.position.coords.latitude, app.position.coords.longitude, radius);
-                }
+                app.onShakeOrButton();
             }
             
             accelZ = acceleration.z;
@@ -53,6 +52,19 @@ var app = {
         
         var options = { frequency: 1000 };  
         var watchID = navigator.accelerometer.watchAcceleration(accelSuccess, accelError, options);
+    },
+    onShakeOrButton:function(){
+        var textField = document.getElementById('sendText');
+        if(textField.value.length > 0)
+        {
+            console.log("We should send a message");
+            PumpService.leaveMessage(app.onMessageSent, app.position.coords.latitude, app.position.coords.longitude, textField.value);
+        }
+        else
+        {
+            console.log("We should get the messages");
+            PumpService.getMessagesNear(app.onMessagesLoaded, app.position.coords.latitude, app.position.coords.longitude, radius);
+        }
     },
     onlineSuccess: function() {
         app.onlineWatcher = navigator.geolocation.watchPosition(app.geoSuccess, app.geoFailure, {});
@@ -68,10 +80,13 @@ var app = {
         //Not sure what to do here
         console.log("We failed to get a location, we should do stuff");
     },
-    sendMessage: function(status, resp) { 
+    onMessageSent: function(status) { 
         console.log("Message has been sent");
+        var textField = document.getElementById('sendText');
+        textField.value = "";
+        alert("Message Sent");
     },
-    recvMessage: function(status, resp) {
-        console.log("Current Response");
+    onMessagesLoaded: function(status, resp) {
+        console.log("Current Response :: " + resp );
     }
 };

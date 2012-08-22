@@ -18,15 +18,15 @@ var PumpService = {
         var xhr = new XMLHttpRequest();
         var url = this.baseUrl + "/message";
         xhr.onreadystatechange = function() {
+            console.log("Ready state = " + xhr.readyState);
             if (xhr.readyState === 4) {
-                cb(xhr.status,JSON.parse(xhr.responseText));
+                cb(xhr.status);
             }
         };
         xhr.open("POST",url,true);
-        var obj = {latitude:lat,
-                   longitude:lon,
-                   message:message};
-        xhr.send(obj);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        var param = "latitude=" + lat + "&longitude=" + lon + "&message=" + encodeURIComponent(message);
+        xhr.send(param);
     }
     
     
