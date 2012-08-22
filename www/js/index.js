@@ -3,7 +3,7 @@ var accelX = 0,
     accelZ = 0,
     timestamp = 0;
 
-var threshold = 5;
+var threshold = 3;
 
 var app = {
     initialize: function() {
