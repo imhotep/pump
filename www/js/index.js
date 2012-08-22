@@ -97,7 +97,7 @@ var app = {
         var messages = resp.messages;
         for(var n = 0; n < messages.length; n++)
         {
-            if(messages[n].distance < 50)
+            if(messages[n].distance < 100)
             {
                 console.log("this is a likely message : " + n);
                 if(Math.abs(now - messages[n].timestamp) < 10000)
