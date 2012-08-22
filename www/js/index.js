@@ -10,7 +10,7 @@ var accelX = 0,
     timestamp = 0;
 
 var threshold = 3;
-var radius = 5000; 
+var radius = 150; 
 
 var app = {
     initialize: function() {
@@ -97,10 +97,10 @@ var app = {
         var messages = resp.messages;
         for(var n = 0; n < messages.length; n++)
         {
-            if(messages[n].distance < 10)
+            if(messages[n].distance < 50)
             {
                 console.log("this is a likely message : " + n);
-                if(now - messages[n].timestamp < 5000)
+                if(Math.abs(now - messages[n].timestamp) < 10000)
                 {
                     console.log("I think this is the one!");
                     sendText.value = messages[n].message;
