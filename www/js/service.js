@@ -1,13 +1,10 @@
-
-(function(exports){
+var PumpService = {
     
-exports.PumpService = {
-    
-    baseUrl:"",
+    baseUrl:"http://23.21.32.1/",
     
     getMessagesNear:function(cb,lat,lon,radius) {
         var xhr = new XMLHttpRequest();
-        var url = baseUrl + "/messages?latitude=" + lat + "&longitude=" + lon + "&radius=" + radius;
+        var url = this.baseUrl + "/messages?latitude=" + lat + "&longitude=" + lon + "&radius=" + radius;
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 cb(xhr.status,JSON.parse(xhr.responseText));
@@ -19,7 +16,7 @@ exports.PumpService = {
     
     leaveMessage:function(cb,lat,lon,message){
         var xhr = new XMLHttpRequest();
-        var url = baseUrl + "/message";
+        var url = this.baseUrl + "/message";
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 cb(xhr.status,JSON.parse(xhr.responseText));
@@ -30,7 +27,7 @@ exports.PumpService = {
                    longitude:lon,
                    message:message};
         xhr.send(obj);
-    };
+    }
     
     
-})(window);
+};
