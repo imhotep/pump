@@ -7,6 +7,7 @@ var PumpService = {
         var url = this.baseUrl + "/messages?latitude=" + lat + "&longitude=" + lon + "&radius=" + radius;
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
+                //console.log("Result:" + xhr.responseText);
                 cb(xhr.status,JSON.parse(xhr.responseText));
             }
         };
