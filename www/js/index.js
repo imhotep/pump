@@ -3,7 +3,8 @@ var accelX = 0,
     accelZ = 0,
     timestamp = 0;
 
-var threshold = 5;
+var threshold = 3;
+var radius = 500; 
 
 var app = {
     initialize: function() {
@@ -30,6 +31,17 @@ var app = {
             
             if(deltaZ >= threshold){
                 console.log("Bump detected! Do stuff!");
+                var textField = document.getElementById('sendText');
+                if(textField.value.length > 0)
+                {
+                    console.log("We should send a message");
+                    PumpService.leaveMessage(app.sendMessage, app.position.coords.latitude, app.position.coords.longitude, textField.value);
+                }
+                else
+                {
+                    console.log("We should get the messages");
+                    PumpService.getMessagesNear(app.recvMessage, app.position.coords.latitude, app.position.coords.longitude, radius);
+                }
             }
             
             accelZ = acceleration.z;
@@ -50,10 +62,16 @@ var app = {
     },
     geoSuccess: function(position) {
         console.log('We have a location');
-        //Decide whether to send or receive
+        app.position = position; 
     },
     geoFailure: function() {
         //Not sure what to do here
         console.log("We failed to get a location, we should do stuff");
+    },
+    sendMessage: function(status, resp) { 
+        console.log("Message has been sent");
+    },
+    recvMessage: function(status, resp) {
+        console.log("Current Response");
     }
 };
