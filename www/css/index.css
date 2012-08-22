@@ -140,6 +140,17 @@ input[type="button"]{
     background-color: #d45948; /* Old browsers */
 }
 
+#status-loading{
+    background: #fab58d; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  #fab58d 7%, #d45948 96%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(7%,#fab58d), color-stop(96%,#d45948)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  #fab58d 7%,#d45948 96%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  #fab58d 7%,#d45948 96%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  #fab58d 7%,#d45948 96%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  #fab58d 7%,#d45948 96%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fab58d', endColorstr='#d45948',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
 #status-success{
     background-image: url(../img/response_success.png);
 }
